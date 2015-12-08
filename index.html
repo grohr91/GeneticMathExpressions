@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <style>
+            body {
+                padding-top: 50px;
+                padding-bottom: 20px;
+            }
+        </style>
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/introjs.css">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header" >
+                    <span class="navbar-brand">Gerador de Expressões Matemáticas</span>
+                </div>
+                <div class="nav navbar-nav navbar-right" style="margin-top: 1%;s">
+                    <div class="btn-group">
+                        <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+                            Leia-me <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a onclick="javascript:startIntro();">Ajuda</a></li>
+                            <!--<li><a onclick="javascript:showComoFunciona();">Como Funciona</a></li>-->
+                            <li><a  data-toggle="modal" data-target="#comoFunciona">Como Funciona</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron">
+            <div class="container">
+                <div class="row">
+                    <!-- ---------------- COFIGURAÇÕES ---------------- -->
+                    <div class="col-md-12" data-step="2" data-intro="Nesta area você pode configurar váriaveis para o ambiente de execução do programa. Para voltar ao padrão inicial, recarregue a tela.">
+                        <div class="panel-group" id="accordion">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                            <label style='width: 100%;cursor: pointer; font-weight: inherit; margin-bottom: 0px;'>Configurações
+                                                <span class="glyphicon glyphicon-cog"></span>
+                                            </label>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <div class="col-md-4" data-step="3" data-position="botton" data-intro="Indica qual a porcentagem de indivíduos de uma população serão gerados a partir de um cruzamento entre dois indivíduos de uma população anterior.">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Taxa de Crossover</span>
+                                                <select id="taxaDeCrossover" class="form-control">
+
+                                                </select>
+                                                <span class="input-group-addon">%</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4" data-step="4" data-position="botton" data-intro="Indica qual a porcentagem de indivíduos de uma população estará sujeita a sofrer algum tipo de mutação.">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Taxa de Mutação</span>
+                                                <select id="taxaDeMutacao" class="form-control">
+
+                                                </select>
+                                                <span class="input-group-addon">%</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4" data-step="5" data-position="botton" data-intro="Refere-se ao tamanho total de uma população de uma geração.">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Tamanho da População</span>
+                                                <input id="tamPop" type="number" class="form-control" placeholder="Ex: 50" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4" data-step="6" data-position="botton" data-intro="Refere-se ao limite máximo de geraçãos que poderam ser geradas até que o resultado esperado não seja alcançado.">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Máximo de Gerações</span>
+                                                <input id="numMaxGeracoes" type="number" class="form-control" placeholder="Ex: 500" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4" data-step="7" data-position="botton" data-intro="Dois indivíduos serão selecionados para o cruzamento a partir da técnica escolhida aqui.">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Seleção</span>
+                                                <select id="tpSelecao" class="form-control">
+                                                    <option>ROLETA</option>
+                                                    <option>TORNEIO</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4" data-step="8" data-position="botton" data-intro="Define se as expressões geradas pelo programa poderão ter resultados DECIMAIS ou apenas INTEIROS.">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Aceita Resultados</span>
+                                                <select id="tpNumero" class="form-control">
+                                                    <option>COM DECIMAL</option>
+                                                    <option>INTEIRO</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ---------------- FIM COFIGURAÇÕES ---------------- -->
+
+                    <div style="width: 100%; display: inline-block;" data-step="9" data-position="botton" data-intro="Nesta area você irá poder escolher os números que faram parte das expressõe a serem geradas. Eles não podem ser repeditos.">
+                        <div class="col-md-12">
+                            <h3>Números que faram parte da expressão</h3>
+                        </div>
+                        <div class="col-md-2">
+                            <select id="n1" class="form-control" onchange="trataValorDuplicadoCombo(this);">
+                                <!--<option></option>-->
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <select id="n2" class="form-control" onchange="trataValorDuplicadoCombo(this);">
+                                <!--<option></option>-->
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <select id="n3" class="form-control" onchange="trataValorDuplicadoCombo(this);">
+                                <!--<option></option>-->
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <select id="n4" class="form-control" onchange="trataValorDuplicadoCombo(this);">
+                                <!--<option></option>-->
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <select id="n5" class="form-control">
+                                <!--<option></option>-->
+                                <option>10</option>
+                                <option>15</option>
+                                <option>20</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <select id="n6" class="form-control">
+                                <!--<option></option>-->
+                                <option>25</option>
+                                <option>50</option>
+                                <option>75</option>
+                                <option>100</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="width: 100%; display: inline-block;" data-step="10" data-position="botton" data-intro="Este campo representa o valor objetivo da expressão a ser gerada com os números da area anterior selecionados.">
+                        <div class="col-md-12">
+                            <h3>Resultado numérico para a expressão resultante</h3>
+                        </div>
+                        <div class="col-md-4">
+                            <input id="solucaoProposta" type="number" class="form-control" placeholder="Resultado" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-1" data-step="11" data-position="right" data-intro="Inicia o processamento!">
+                        <a onclick="gerarSolucao();" class="btn btn-primary" role="button">Gerar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- ---------------- LOG ---------------- -->
+            <div class="row">
+                <div class="col-md-12" data-step="12" data-position="top" data-intro="Aqui você estara livre para visualizar todos as expressões e resultados gerados pelo programa, assim como quais expressões cruzaram e se houve ou não mutação.">
+                    <h2>Log</h2>
+                    <hr>
+                    <div id="melhorIndividuo"></div>
+                    <div id="log" class="panel-group">
+
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <footer class="row" data-step="1" data-position="top" data-intro="Bem vindo ao gerador de expressões matemáticas! Este é um trabalho da cadeira de Inteligência Artificial da UNISC - Universidade de Santa Cruz do Sul desenvolvido pelos integrantes abaixo descritos.. ">
+                <div class="col-md-12 text-center">© Copyright 2014.IESAM - UNISC - Universidade de Santa Cruz do Sul - Todos os direitos reservados.</br>
+                    <a href="mailto:grohr@ig.com.br">Guilherme Rohr</a> e <a href="mailto:mauricioxsilva90@gmail.com">Maurício Xavier da Silva</a></div>
+
+            </footer>
+        </div> 
+        <!-- /container -->
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="comoFunciona" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3 class="modal-title" id="myModalLabel"><strong>Como funciona:</strong> <small>Jogo da Expressão Matemática</small></h3>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#especificacao" data-toggle="tab">Especificações</a></li>
+                            <li><a href="#algoritmoGenetico" data-toggle="tab">Algoritmo Genético</a></li>
+                            <li><a href="#estrutura" data-toggle="tab">Estrutura</a></li>
+                            <li><a href="#aplicacao" data-toggle="tab">Aplicação</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="especificacao">
+                                <p></p>
+                                <p class="text-justify">Neste jogo, o jogador tem a tarefa de encontrar uma expressão matemática cujo valor é o mais próximo a um valor escolhido aleatoriamente usando apenas as operações básicas (4 operações) e um conjunto predefinido de números. O jogo tem outras restrições: todos os resultados intermediários e o resultado final deve ser números inteiros positivos. Restrições adicionais são também colocados sobre os números selecionados e objetivo. O jogador recebe quatro números aleatórios entre 1 e 9, um número entre os 3 seguintes {10, 15, 20} e um entre os números {25, 50, 75, 100}. O número objetivo é escolhido aleatoriamente a partir do intervalo [100,999]. O jogador pode usar os números selecionados apenas uma vez. Quem tem a expressão com o número mais próximo do número objetivo terá o melhor algoritmo genético.</p>
+
+                                <p><strong>Exemplo:</strong></p>
+                                <p>Números gerados: 2,6,8,3,10,75   (observe a obediência aos critérios)</p>
+                                <p>Número objetivo: 684</p>
+
+                                <p><strong>Exemplo de dois cromossomos:</strong></p>
+                                <p>((10 * (3+75)) – (2*6)*8))</p>
+                                <p>(( 2 = 6) * (10+75))</p>
+
+                                <p class="text-justify">A interface do software deve apresentar cada cromossomo criado a cada geração, bem como o valor do fitness. O histórico de todos os cromossomos deve ser mantido para consulta após a execução do AG. 
+                                    Após a roleta deverá apresentar os casais formados identificando-os por cores iguais.</p>
+
+                            </div>
+                            <div class="tab-pane" id="algoritmoGenetico">
+                                <h4><strong>O que é?</strong></h4>
+                                <p class="text-justify">Algoritmos Genéticos são inspirados na teoria da evolução de Darwin. Solução de um problema através de algoritmos genéticos utiliza um processo evolucionário (a solução é desenvolvida).</p>
+                                <p class="text-justify">O algoritmo começa um um conjunto de soluções (representadas por cromossomos) chamados população. Soluções de uma população são utilizadas para formar uma nova população. Isto é motivado pela esperança que a nova população será melhor do que a primeira. Soluções que são selecionadas para formar novas gerações de soluções são selecionadas de acordo com sua adequação - quanto melhores, mais chances de reprodução terão.</p>
+                                <p class="text-justify">Esse processo é repetido até que alguma condição é satisfeita (por exemplo o número de populações ou o aperfeiçoamento da melhor solução).</p>
+                                </br>
+                                <h4><strong>Esboço de sua aplicação</strong></h4>
+                                <ul>
+                                    <li class="text-justify"><strong>Início:</strong> é gerada uma população aleatória de <em>n</em> indivíduos (conforme selecionada na configuração).</li>
+                                    <li class="text-justify"><strong>Adequação:</strong> é feito o cálculo da aptidao para cada indivíduo, conforme sua expressão resultante.</li>
+                                    <li class="text-justify"><strong>Nova população:</strong> uma nova população é criada repetindo os passos seguintes até que a nova população esteja completa.</li>
+                                    <ul>
+                                        <li class="text-justify"><strong>Seleção:</strong> selecione de acordo com sua aptidão (melhor aptidão, mais chances de ser selecionado) dois cromossomos para serem os pais.</li>
+                                        <li class="text-justify"><strong>Cruzamento:</strong> com a probabilidade de cruzamento os pais são cruzados para formar até dois novos indivíduos para a nova geração. Se não realizar cruzamento, os pais selecionados passam fazer parte da nova geração.</li>
+                                        <li class="text-justify"><strong>Mutação:</strong> de acordo com as probabilidades de mutação, os cromossomos podem sofrer uma mudança de operador em sua expressão original.</li>
+                                        <li class="text-justify"><strong>Teste:</strong> é verificado se a solução desejada foi atingida por um dos indivíduos. Se sim, então o processamento é encerrado e o programa exibe a melhor solução da população atual. Senão, no final do programa é exibido o primeiro melhor indivíduo encontrado.</li>
+                                        <li class="text-justify"><strong>Repita:</strong> são geradas novas populações utilizando a anteriormente gerada, até que se encontre o resultado objetivo ou se alcance o número máximo de gerações configurado.</li>
+                                    </ul>
+                                </ul>
+                            </div>
+
+                            <div class="tab-pane" id="estrutura">
+                                <h4><strong>Cromossomo</strong></h4>
+                                <p class="text-justify">O cromossomo utilizado neste trabalho possui um vetor de genes (caracteres), com tamanho fixo de 33 posições conforme representado abaixo:</p>
+                                <p class="text-center"><img src="img/cromossomo.png" alt="Cromossomo"></p>
+                                <p>Onde:</p>
+                                <ul>
+                                    <li><strong>(:</strong> Abre Parenteses ou Vazio.</li>
+                                    <li><strong>):</strong> Fecha Parenteses ou Vazio.</li>
+                                    <li><strong>N:</strong> Um Número ou Vazio.</li>
+                                    <li><strong>*:</strong> Uma Operação ou Vazio.</li>
+                                </ul>
+                                <p><strong>Exemplos:</strong></p>
+                                <p class="text-danger">
+                                    <strong>Vetor:</strong>&nbsp;["(", "(", "4", "", "*", "", "", "2", "", "", "*", "", "", "75", "", ")", "-", "", "", "9", "", ")", "*", "", "", "10", "", "", "-", "", "3", "", ""]
+                                    </br><strong>Exibição:</strong>((4*(10+9/3)/2)-75)
+                                </p>
+                                <p class="text-warning">
+                                    <strong>Vetor:</strong>&nbsp;["(", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "4", "", "", "+", "", "", "9", ")", "", "*", "", "75", "", ""]
+                                    </br><strong>Exibição:</strong> (4+9)*75 
+                                </p>
+                                <p class="text-info">
+                                    <strong>Vetor:</strong>&nbsp;["", "", "10", "", "*", "(", "", "9", "", "", "*", "", "", "4", ")", "", "+", "(", "", "2", "", "", "-", "", "", "3", "", "", "-", "", "75", ")", ""]
+                                    </br><strong>Exibição:</strong>10*(9*4)+(2-3-75)
+                                </p>
+                            </div>
+
+                            <div class="tab-pane" id="aplicacao">
+                                <!-- ----------- 1 GERACAO ----------- -->
+                                <h4 class="text-info"><strong>Primeira geração</strong></h4>
+                                <p class="text-justify">A primeira geração de indivíduos é gerada aleatóriamente, seguindo as seguintes regras de verificação no cromossomo:</p>
+                                <p><strong>Parenteses:</strong></p>
+                                <ul>
+                                    <li>Não poderá abrir parenteses nas duas últimas posições da expressão;</li>
+                                    <li>Não poderá fechar parenteses nas duas primeiras posições da expressão;</li>
+                                    <li>Não poderá fechar após a ocorrência de um operador. Ex: *)</li>
+                                    <li>Não poderá abrir após a ocorrência de um operando. Ex: 1(</li>
+                                    <li>Só e somente poderá fechar se houver um parenteses aberto anteriormente. Ex: )())</li>
+                                    <li>Só e somente poderá abrir se houver menos que 3 parenteses abertos sem terem fechados;</li>
+                                </ul>
+
+                                <p><strong>Operando:</strong></p>
+                                <ul>
+                                    <li>Não poderá repetir números que já compõem a expressão;</li>
+                                    <li>Ocorre quando não há operadores; Expressão começa com um operando;</li>
+                                    <li>Ocorre após um operador, desconsidendo todos os parenteses entre eles. Ex: *(7)</li>
+                                </ul>
+
+                                <p><strong>Operador:</strong></p>
+                                <ul>
+                                    <li>Ocorre após um operando;</li>
+                                </ul>
+
+                                <p><strong>Limpeza de parenteses:</strong></p>
+                                <p>Após a criação do cromossomo, é feita uma varredura no vetor, retirando todos parenteses desnecessários.</p>
+                                <p>Por exemplo: (3)*((5)+1) -> 3*(5+1)</p>
+                                <!-- ----------- FIM 1 GERACAO ----------- -->
+
+                                </br>
+
+                                <!-- ----------- APTIDÃO ----------- -->
+                                <h4 class="text-info"><strong>Aptidão</strong></h4>
+                                <p class="text-justify">Após feita a geração de cada uma das populações é calculada a aptidão de cada indivíduo conforme abaixo:</p>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title"> <strong><span class="text-success">Aptidão</span>  = |<span class="text-danger">Resultado da expressão gerada</span> - <span class="text-info">resultado objetivo</span>|</strong></h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p>Supondo que tenhamos um indivíduo com cromossomo (4+9)*75 = <span class="text-danger">975</span> e um resultado objetivo igual a <span class="text-info">990</span>, então:</p>
+                                        <p>|<span class="text-danger">975</span> - <span class="text-info">990</span>| = |-15| = <span class="text-success">15</span></p>
+                                    </div>
+                                </div>
+                                <!-- ----------- FIM APTIDÃO ----------- -->
+
+                                </br>
+
+                                <!-- ----------- CROSSOVER ----------- -->
+                                <h4 class="text-info"><strong>Crossover</strong></h4>
+                                <p class="text-justify">Cada indivíduo de um população estará sujeito a ser selecionado para realizar o crossover com um outro da mesma população.
+                                    Isto ocorre no processo de criação de uma nova população, quando é gerado um número aleatório, entre 0 e 100, e caso este for menor que a <em>taxa de crossover</em> escolhida na configuração do programa, são selecionados indíviduos para cruzarem.</p>
+                                <p>O ponto de corte pode ser feita nas posições 2, 4, 7, 10, 13, 16, 19, 22, 25, 28, 30 do vetor de genes, ou seja, onde há operandos ou operadores.
+                                    A ecolha da posição do ponto de corte é exaustiva, dentre as acima citadas, até que se encontre um primeiro filho válido. 
+                                    Caso não encontre nenhum filho válido entre o cruzamento de dois pais, são selecionados novos pais e o processo se repete.</p>
+                                <p><strong>Gerados os pais:</strong></p>
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <p><strong>Vetor:</strong>&nbsp;<span class="text-info">["", "", "75", "", "*", "", "", "2", "", "", "-", "", "", "10", "", "", "+", "", "", "4", "", "", "*", "", "", "9", "", "", "*", "", "3", "", ""]</span></br>
+                                            <strong>Exibição:</strong>&nbsp;<span class="text-info">75*2-10  +4*9*3</span></p>
+                                        <p><strong>Vetor:</strong>&nbsp;<span class="text-danger">["", "", "75", "", "*", "", "", "2", "", "", "+", "", "", "10", "", "", "/", "", "(", "9", "", "", "-", "", "", "3", "", "", "-", "", "4", "", ")"]</span></br>
+                                            <strong>Exibição:</strong>&nbsp;<span class="text-danger">75*2+10/(9-3-4)</span></p>
+                                    </div>
+                                </div>
+                                <p>Serão gerados os seguintes <strong>filhos</strong>, supondo que o ponto de corte é feito na posição <strong>16</strong> do vetor:</p>
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <p><strong>Vetor:</strong>&nbsp;<span class="text-info">["", "", "75", "", "*", "", "", "2", "", "", "-", "", "", "10", "", "",</span><span class="text-danger"> "/", "", "(", "9", "", "", "-", "", "", "3", "", "", "-", "", "4", "", ")"]</span></br>
+                                            <strong>Exibição:</strong>&nbsp;<span class="text-info">75*2-10</span><span class="text-danger">/(9-3-4)</span></p>
+                                        <p><strong>Vetor:</strong>&nbsp;<span class="text-danger">["", "", "75", "", "*", "", "", "2", "", "", "+", "", "", "10", "", "",</span><span class="text-info">"+", "", "", "4", "", "", "*", "", "", "9", "", "", "*", "", "3", "", ""]</span></br>
+                                            <strong>Exibição:</strong>&nbsp;<span class="text-danger">75*2+10</span><span class="text-info">+4*9*3</span></p>
+                                    </div>
+                                </div>
+                                <!-- ----------- FIM CROSSOVER ----------- -->
+
+                                </br>
+
+                                <!-- ----------- MUTACAO ----------- -->
+                                <h4 class="text-info"><strong>Mutação</strong></h4>
+                                <p>Após gerada uma população de indivíduos, cada um destes passam por um teste sujeitos a serem mutados.
+                                    Assim como no processo de <em>crossover</em>, para cada indivíduo é gerado um número aleatório entre 0 e 100, e se este for menor que a <em>taxa de mutação</em> selecionada na configuração do programa, então o indivíduo sofre mutação.</p>
+                                <p>Devido a alta taxa de rejeição a indivíduos inválidados, definimos que a mutação somente irá ocorre nas posições dos operadores do vetor de genes (4, 10, 16, 22, 28).
+                                    Após ser escolhido um operador aleatoriamente, este é testado em todas as posições possíveis para a mutação. Então é escolhida a mutação de melhor aptidão.</p>
+                                <p>Por exemplo: </p>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Cromossomo gerado
+                                    </div>
+                                    <div class="panel-body">
+                                        <p><strong>Vetor:</strong>&nbsp;["", "", "75", "", "*", "", "", "2", "", "", "-", "", "", "10", "", "","", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]</br>
+                                            <strong>Exibição:</strong>&nbsp;75*2-10</p>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Cromossomo mutado
+                                    </div>
+                                    <div class="panel-body">
+                                        <p>Supondo que seja escolhido o operador p <strong class="text-info">+</strong> e que o resultado objetivo seja <strong>150</strong></p>
+                                        <p><strong>1º teste:</strong></br>
+                                            <strong>Vetor:</strong>&nbsp;["", "", "75", "", "<strong class="text-info">+</strong>", "", "", "2", "", "", "-", "", "", "10", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]</span></br>
+                                            <strong>Exibição:</strong>&nbsp;75<strong class="text-info">+</strong>2-10</br>
+                                            <strong>Aptidão:</strong>&nbsp;|67 - 150| = 83</p>
+                                        <p><strong>2º teste:</strong></br>
+                                            <strong>Vetor:</strong>&nbsp;["", "", "75", "", "*", "", "", "2", "", "", "<strong class="text-info">+</strong>", "", "", "10", "", "","", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]</br>
+                                            <strong>Exibição:</strong>&nbsp;75*2<strong class="text-info">+</strong>10</br>
+                                            <strong>Aptidão:</strong>&nbsp;|160 - 150| = 10</p>
+                                        <p>O cromossomo mutante escolhido então será o do <strong>2º teste</strong>, pois possui menor aptidão.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Entendido</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+
+        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.0.js"><\/script>')</script>
+        <script src="js/libs/jquery.tablesorter.min.js"></script>
+        <script src="js/vendor/bootstrap.min.js"></script>
+        <script src="js/libs/intro.js"></script>
+        <script src="js/utils/log.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/classes/Populacao.js"></script>
+        <script src="js/classes/Individuo.js"></script>
+        <script src="js/classes/Cromossomo.js"></script>
+    </body>
+</html>
